@@ -1,0 +1,549 @@
+<!Doctype html>
+<html lang="ko">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Web scraping 연습 - 따릉이 현황</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <style type="text/css">
+            div.contents {
+                margin: 10px 0 20px 0;
+            }
+
+            table {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            td,
+            th {
+                padding: 10px;
+                border: 1px solid black;
+            }
+
+            .like{
+                color: blue;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <h1>Web scraping 연습 - 따릉이 현황</h1>
+
+        <hr/>
+
+        <div class="contents">
+            <h2>서울시 따릉이 현황</h2>
+            <p>모든 거치대(stationName)와 거치대 수(rackTotCnt), 남은 따릉이 수(parkingBikeTotCnt)</p>
+            <table>
+                <thead>
+                <tr>
+                    <td>거치대 위치</td>
+                    <td>거치대 수</td>
+                    <td>현재 거치된 따릉이 수</td>
+                </tr>
+                </thead>
+                <tbody id="bike-info">
+                <tr>
+                    <td class="station">101. (구)합정동 주민센터</td>
+                   <td class="rack">7</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">102. 망원역 1번출구 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">103. 망원역 2번출구 앞</td>
+                   <td class="rack">6</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr class="like">
+                    <td class="station">104. 합정역 1번출구 앞</td>
+                   <td class="rack">5</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">105. 합정역 5번출구 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">106. 합정역 7번출구 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">107. 신한은행 서교동금융센터점 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr class="like">
+                    <td class="station">108. 서교동 사거리</td>
+                   <td class="rack">2</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">109. 제일빌딩 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">5</td>
+                </tr>
+                <tr class="like">
+                    <td class="station">111. 상수역 2번출구 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">112. 극동방송국 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">5</td>
+                </tr>
+                <tr>
+                    <td class="station">114. 홍대입구역 8번출구 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">115. 마스타 빌딩 앞</td>
+                   <td class="rack">5</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">116. 일진아이윌아파트 옆</td>
+                   <td class="rack">7</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">117. 홍은사거리</td>
+                   <td class="rack">7</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">118. 광흥창역 2번출구 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">119. 서강나루 공원</td>
+                   <td class="rack">2</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">120. 신수동 사거리</td>
+                   <td class="rack">7</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">121. 마포소방서 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">122. 신성기사식당 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">123. 문화촌 공원</td>
+                   <td class="rack">2</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">124. 서강대 정문 건너편</td>
+                   <td class="rack">2</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">125. 서강대 남문 옆</td>
+                   <td class="rack">7</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">126. 서강대 후문 옆</td>
+                   <td class="rack">2</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">127. 현대벤처빌 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">128. 신촌역(2호선) 1번출구 옆</td>
+                   <td class="rack">2</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">129. 신촌역(2호선) 6번출구 옆</td>
+                   <td class="rack">7</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">130. 신촌역(2호선) 7번출구 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">131. 증산2교</td>
+                   <td class="rack">5</td>
+                   <td class="parking">4</td>
+                </tr>
+                <tr>
+                    <td class="station">133. 해담는다리</td>
+                   <td class="rack">7</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">134. 연세로 명물길</td>
+                   <td class="rack">8</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">135. 명물길 원형무대 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">4</td>
+                </tr>
+                <tr>
+                    <td class="station">136. 대흥동 주민센터</td>
+                   <td class="rack">9</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">137. NH농협 신촌지점 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">138. 신촌동 제1공영주차장 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">139. 연세대 정문 건너편</td>
+                   <td class="rack">5</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">140. 이화여대 후문</td>
+                   <td class="rack">2</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">141. 연대 대운동장 옆</td>
+                   <td class="rack">2</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">142. 아현역 4번출구 앞</td>
+                   <td class="rack">3</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">143. 공덕역 2번출구</td>
+                   <td class="rack">1</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">144. 공덕역 8번출구</td>
+                   <td class="rack">2</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">145. 공덕역 5번출구</td>
+                   <td class="rack">1</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">146. 마포역 2번출구 뒤</td>
+                   <td class="rack">4</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">147. 마포역 4번출구 뒤</td>
+                   <td class="rack">9</td>
+                   <td class="parking">4</td>
+                </tr>
+                <tr>
+                    <td class="station">148. 용강동 주민센터 앞</td>
+                   <td class="rack">3</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">150. 서강대역 2번출구 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">151. 망원1동주민센터</td>
+                   <td class="rack">2</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">152. 마포구민체육센터 앞</td>
+                   <td class="rack">0</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">153. 성산2교 사거리</td>
+                   <td class="rack">2</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">154. 마포구청역</td>
+                   <td class="rack">5</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">155. 가좌역1 번출구 뒤</td>
+                   <td class="rack">7</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">157. 애오개역 4번출구 앞</td>
+                   <td class="rack">4</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">158. 독립문 어린이 공원</td>
+                   <td class="rack">7</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">159. 이대역 4번 출구</td>
+                   <td class="rack">9</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">160. 북아현동 가구거리</td>
+                   <td class="rack">2</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">161. 무악재역1번 출구</td>
+                   <td class="rack">0</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">162. 봉원고가차도 밑</td>
+                   <td class="rack">7</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">163. 명지전문대학교 정문 앞</td>
+                   <td class="rack">9</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">164. 북가좌1동 주민센터</td>
+                   <td class="rack">2</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">165. 중앙근린공원</td>
+                   <td class="rack">2</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">166. 가재울 초등학교</td>
+                   <td class="rack">2</td>
+                   <td class="parking">4</td>
+                </tr>
+                <tr>
+                    <td class="station">167. 연가초등학교 옆</td>
+                   <td class="rack">7</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">169. 북가좌 삼거리</td>
+                   <td class="rack">7</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">170. 가재울 뉴타운 주유소 옆</td>
+                   <td class="rack">2</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">171. 임광빌딩 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">173. 서대문역 8번출구 앞</td>
+                   <td class="rack">0</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">175. 홍연2교옆</td>
+                   <td class="rack">2</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">176. 명지대학교 도서관</td>
+                   <td class="rack">2</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">177. 북가좌 초등학교</td>
+                   <td class="rack">0</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">178. 증산3교 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">179. 가좌역 4번출구 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">5</td>
+                </tr>
+                <tr>
+                    <td class="station">180. 충정로역 7번출구 아래</td>
+                   <td class="rack">2</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">181. 망원초록길 입구</td>
+                   <td class="rack">7</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">182. 망원2빗물펌프장 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">183. 하늘채코오롱아파트 건너편</td>
+                   <td class="rack">7</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">184. SK망원동주유소 건너편</td>
+                   <td class="rack">1</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">185. 마포 신수공원 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">186. 월드컵공원</td>
+                   <td class="rack">2</td>
+                   <td class="parking">4</td>
+                </tr>
+                <tr>
+                    <td class="station">188. 홍은동 정원여중 입구</td>
+                   <td class="rack">2</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">191. 서우빌딩(바른학원)</td>
+                   <td class="rack">2</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">192. 연서어린이공원</td>
+                   <td class="rack">2</td>
+                   <td class="parking">2</td>
+                </tr>
+                <tr>
+                    <td class="station">194. 증산교 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">195. 모래내고가차도</td>
+                   <td class="rack">2</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">196. 연희교차로 인근</td>
+                   <td class="rack">2</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">198. 충정2교</td>
+                   <td class="rack">7</td>
+                   <td class="parking">7</td>
+                </tr>
+                <tr>
+                    <td class="station">199. 서울 월드컵 경기장</td>
+                   <td class="rack">2</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">200. 국회의원회관</td>
+                   <td class="rack">2</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">201. 진미파라곤 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">202. 국민일보 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">203. 국회의사당역 3번출구 옆</td>
+                   <td class="rack">7</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">204. 국회의사당역 5번출구 옆</td>
+                   <td class="rack">5</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">205. 산업은행 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">0</td>
+                </tr>
+                <tr>
+                    <td class="station">206. KBS 앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">3</td>
+                </tr>
+                <tr>
+                    <td class="station">207. 여의나루역 1번출구 앞</td>
+                   <td class="rack">2</td>
+                   <td class="parking">5</td>
+                </tr>
+                <tr>
+                    <td class="station">209. 유진투자증권빌딩 앞</td>
+                   <td class="rack">4</td>
+                   <td class="parking">8</td>
+                </tr>
+                <tr>
+                    <td class="station">210. IFC몰</td>
+                   <td class="rack">3</td>
+                   <td class="parking">1</td>
+                </tr>
+                <tr>
+                    <td class="station">211. 여의도역 4번출구 옆</td>
+                   <td class="rack">5</td>
+                   <td class="parking">9</td>
+                </tr>
+                <tr>
+                    <td class="station">212. 여의도역 1번출구 옆</td>
+                   <td class="rack">7</td>
+                   <td class="parking">6</td>
+                </tr>
+                <tr>
+                    <td class="station">213. KT앞</td>
+                   <td class="rack">7</td>
+                   <td class="parking">7</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+</html>
